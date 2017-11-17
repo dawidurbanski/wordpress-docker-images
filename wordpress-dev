@@ -7,6 +7,11 @@ RUN wget https://phar.phpunit.de/phpunit-6.4.phar \
     && chmod +x phpunit-6.4.phar \
     && mv phpunit-6.4.phar /usr/local/bin/phpunit
 
+RUN curl -sSL -o /usr/local/bin/wp "https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar" \
+    && chmod +x /usr/local/bin/wp \
+    && mkdir -p /etc/wp-cli \
+    && chown www-data:www-data /etc/wp-cli
+
 RUN npm install --global gulp-cli \
     && npm install -g grunt-cli \
     && npm install -g bower
