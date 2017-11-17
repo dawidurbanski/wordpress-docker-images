@@ -1,0 +1,6 @@
+FROM mysql:5.7.15
+
+RUN service mysql start && \
+    echo "CREATE DATABASE wordpress" > /docker-entrypoint-initdb.d/db.sql
+
+EXPOSE 3306

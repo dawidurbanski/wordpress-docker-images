@@ -1,0 +1,15 @@
+FROM tatemz/wp-cli
+
+RUN set -ex; \
+	\
+	apt-get update; \
+	apt-get install -y \
+		wget \
+	; \
+	rm -rf /var/lib/apt/lists/*; \
+	docker-php-ext-install zip;
+    
+RUN mkdir /installer && cd /installer && \
+    wget https://gist.githubusercontent.com/DawidUrbanski/ad7c4cf5cf72bb901f4630e141608688/raw/f0e696968b641cfad772bf2425bbeffda262767d/wordpress-install.sh
+
+CMD bash /installer/wordpress-install.sh

@@ -1,0 +1,11 @@
+FROM composer:1.5.2
+
+RUN set -ex; \
+	\
+	apk update; \
+	apk add ca-certificates wget && update-ca-certificates && apk add openssl; \
+	apk add -y \
+		git \
+		wget \
+	; \
+	rm -rf /var/lib/apt/lists/*;

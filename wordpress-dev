@@ -1,0 +1,10 @@
+FROM dawidurbanski/wordpress-composer
+
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+    && apt-get install -y nodejs
+
+RUN npm install --global gulp-cli \
+    && npm install -g grunt-cli \
+    && npm install -g bower
+
+VOLUME /var/www/html

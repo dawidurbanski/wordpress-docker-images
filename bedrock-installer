@@ -1,0 +1,18 @@
+FROM dawidurbanski/composer
+
+RUN docker-php-ext-install zip
+
+RUN composer create-project roots/bedrock /var/www/html && \
+    cd /var/www/html && mkdir temp && cd temp && \
+    wget https://gist.githubusercontent.com/DawidUrbanski/a8e5a59d88018f0164d4289c3285b4fd/raw/23134501cb1d7bd5e94c060959927845d6fc6a22/wp-cli.yml && \
+    rm /var/www/html/wp-cli.yml && mv /var/www/html/temp/wp-cli.yml /var/www/html/wp-cli.yml && \
+    rm -rf /var/www/html/temp
+
+CMD chown -R www-data:www-data /var/www/html/web && \
+	touch /var/www/html/web/.htaccess && \
+	chown www-data:www-data /var/www/html/web/.htaccess
+    
+COPY wordpress/.env /var/www/html/.env
+COPY wordpress/composer.json /var/www/html/composer.json
+    
+VOLUME /var/www/html
